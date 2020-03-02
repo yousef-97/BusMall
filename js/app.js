@@ -46,6 +46,8 @@ var shownArr = [];
 var randomLeft;
 var randomCenter
 var randomRight
+
+//function to random images
 function theRandomImg(){
     
     while(true){
@@ -75,12 +77,13 @@ function theRandomImg(){
         }
     }
     shownArr.push(randomLeft.name,randomCenter.name,randomRight.name);//for counting the how many the iten appear
-    console.log(shownArr);
+    // console.log(shownArr);
 }
+//calling to show the images
 theRandomImg();
 
 
-// The Event
+// The Event click
 var pickedArr = [];
 function clickEvent(event){
 
@@ -101,14 +104,14 @@ function clickEvent(event){
         case  event.target.id === 'rightImg':
             pickedArr.push(event.target.alt);
             randomRight.picks++;
-            console.log(randomRight.picks)
+            // console.log(randomRight.picks)
             theRandomImg();
             break;       
     }
     // console.log(totalClicks);
     
 
-    //to remove eventlistener
+    /////to remove eventlistener
     if(totalClicks === 25){
         // console.log(shownArr);
         // console.log(pickedArr);
@@ -125,12 +128,12 @@ function clickEvent(event){
         leftImg.remove();
         centerImg.remove();
         rightImg.remove();
-        theGraphs(shown,'graph1');
-        theGraphs(pickedImg,'graph2');
+
     
       }
 
 }
+
 theContener.addEventListener('click',clickEvent)
 
 
@@ -142,30 +145,3 @@ function getRandomNum(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-function theGraphs(theData,id){
-    var graph = document.getElementById(id).getContext('2d');
-    // var graph = document.getElementById('graph2').getContext('2d');
-    // eslint-disable-next-line no-undef
-    var myChart = new Chart(graph, {
-      type: 'bar',
-      data: {
-        labels: theName,
-        datasets: [{
-          label: '# of Votes',
-          data: theData ,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-}

@@ -2,8 +2,6 @@
 
 
 
-
-
 var itemName = ['bag.jpg','banana.jpg','bathroom.jpg','boots.jpg','breakfast.jpg','bubblegum.jpg','chair.jpg',
 'cthulhu.jpg','dog-duck.jpg','dragon.jpg','pen.jpg','pet-sweep.jpg','scissors.jpg','shark.jpg','sweep.png','tauntaun.jpg',
 'unicorn.jpg','usb.gif','water-can.jpg','wine-glass.jpg'];
@@ -44,9 +42,9 @@ for(var i = 0 ; i < itemName.length;i++){
 
 var shownArr = [];
 var randomLeft;
-var randomCenter
-var randomRight
-
+var randomCenter;
+var randomRight;
+var thecounter = 0;
 //function to random images
 function theRandomImg(){
     
@@ -54,14 +52,26 @@ function theRandomImg(){
         var firstItem = getRandomNum(0, itemName.length);
         var secondItem = getRandomNum(0, itemName.length);
         var thidItem = getRandomNum(0, itemName.length);
+    
         if(firstItem!== secondItem && secondItem!==thidItem && firstItem !==thidItem){
+
             randomLeft = data[firstItem];
             randomCenter = data[secondItem];
             randomRight = data[thidItem];
-
-            randomLeft.appear++;
-            randomCenter.appear++;
-            randomRight.appear++;
+            console.log(shownArr.length);
+            if (randomLeft.name!==shownArr[shownArr.length-3]&&randomCenter.name!==shownArr[shownArr.length-2]&&randomRight.name!==shownArr[shownArr.length-1]&&
+                randomLeft.name!==shownArr[shownArr.length-2]&&randomCenter.name!==shownArr[shownArr.length-1]&&randomRight.name!==shownArr[shownArr.length-3]&&
+                randomLeft.name!==shownArr[shownArr.length-1]&&randomCenter.name!==shownArr[shownArr.length-3]&&randomRight.name!==shownArr[shownArr.length-2]){
+                
+                //i know its along i statement but my mind is stuck
+                
+                    // console.log(shownArr.length);
+                console.log(randomLeft.name,randomCenter.name,randomRight.name);
+                randomLeft.appear++;
+                randomCenter.appear++;
+                randomRight.appear++;
+            }
+            else{theRandomImg();}
            
             
 
@@ -115,7 +125,6 @@ function clickEvent(event){
     if(totalClicks === 25){
         // console.log(shownArr);
         // console.log(pickedArr);
-
         theContener.removeEventListener('click',clickEvent)
         for (i = 0; i<itemName.length;i++){
             var creating = document.createElement('li');
@@ -128,6 +137,8 @@ function clickEvent(event){
         leftImg.remove();
         centerImg.remove();
         rightImg.remove();
+        theGraphs(shown,'graph1');
+        theGraphs(pickedImg,'graph2');
 
     
       }
@@ -143,5 +154,34 @@ function getRandomNum(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
+}
+
+
+function theGraphs(theData,id){
+    var graph = document.getElementById(id).getContext('2d');
+    // var graph = document.getElementById('graph2').getContext('2d');
+    // eslint-disable-next-line no-undef
+    var myChart = new Chart(graph, {
+      type: 'bar',
+      data: {
+        labels: theName,
+        datasets: [{
+          label: '# of Votes',
+          data: theData ,
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
 }
 

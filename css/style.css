@@ -1,0 +1,21 @@
+#firstImg{
+
+    display: inline-block;
+}
+#secondImg{
+    display: inline-block;
+}
+#thirdImg{
+    display: inline-block;
+}
+img{
+    width: 400px;
+    height:400px;
+}
+canvas{margin:60px 0;}
+#contenerOfLists{
+    font-size: 20px;
+    margin-left: 30px;
+    line-height: 1.3;
+
+}

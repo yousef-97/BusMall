@@ -138,8 +138,8 @@ function clickEvent(event){
         leftImg.remove();
         centerImg.remove();
         rightImg.remove();
-        theGraphs(shown,'graph1');
-        theGraphs(pickedImg,'graph2');
+        theGraphs(shown,'graph1','shown');
+        theGraphs(pickedImg,'graph2','picked');
 
     
       }
@@ -158,7 +158,7 @@ function getRandomNum(min, max) {
 }
 
 
-function theGraphs(theData,id){
+function theGraphs(theData,id,type){
     var graph = document.getElementById(id).getContext('2d');
     // var graph = document.getElementById('graph2').getContext('2d');
     // eslint-disable-next-line no-undef
@@ -167,10 +167,10 @@ function theGraphs(theData,id){
       data: {
         labels: theName,
         datasets: [{
-          label: '# of Votes',
+          label: `# of ${type}`,
           data: theData ,
-          backgroundColor: 'rgba(255, 99, 132, 0.2)',
-          borderColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: 'rgba(0, 0, 0, .6)',
+          borderColor: 'rgba(133, 22, 12, 1)',
           borderWidth: 1
         }]
       },

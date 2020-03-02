@@ -96,7 +96,8 @@ theRandomImg();
 // The Event click
 var pickedArr = [];
 function clickEvent(event){
-
+    console.log(event.target);
+    if (event.target.id ==='leftImg' ||event.target.id === 'centerImg'||event.target.id === 'rightImg'){
     totalClicks++;
     switch (true) {
         case event.target.id === 'leftImg':
@@ -117,7 +118,7 @@ function clickEvent(event){
             // console.log(randomRight.picks)
             theRandomImg();
             break;       
-    }
+    }}
     // console.log(totalClicks);
     
 

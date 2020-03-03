@@ -33,10 +33,11 @@ function Item(name){
     this.picks = 0;
     this.appear = 0;
     data.push(this); //to put each object in arr so each index has aname and file path
+    
     // console.log(this.filepath);
 }
 for(var i = 0 ; i < itemName.length;i++){
-    new Item(itemName[i]);
+      new Item(itemName[i]);
 }
 // console.log(data); i use it to check that (whate if i put data.push(this before all properites))
 
@@ -118,23 +119,28 @@ function clickEvent(event){
             // console.log(randomRight.picks)
             theRandomImg();
             break;       
-    }}
+    }
+  }
     // console.log(totalClicks);
     
 
     /////to remove eventlistener
     if(totalClicks === 25){
-        // console.log(shownArr);
-        // console.log(pickedArr);
-        theContener.removeEventListener('click',clickEvent)
-        for (i = 0; i<itemName.length;i++){
-            var creating = document.createElement('li');
-            contenerOfLists.appendChild(creating);
-            creating.textContent = `${data[i].name} is appear ${data[i].appear} and has ${data[i].picks}picks`;
+      render();
+      theContener.removeEventListener('click',clickEvent)
+      // render();
+    //     // console.log(shownArr);
+    //     // console.log(pickedArr);
+    //     theContener.removeEventListener('click',clickEvent)
+    //     for (i = 0; i<itemName.length;i++){
+    //         var creating = document.createElement('li');
+    //         contenerOfLists.appendChild(creating);
+    //         shown.push(data[i].appear);
+    //         pickedImg.push(data[i].picks);
+    //         creating.textContent = `${data[i].name} is appear ${data[i].appear} and has ${data[i].picks}picks`;
             
-            shown.push(data[i].appear);
-            pickedImg.push(data[i].picks);
-        }
+            
+    //     }
         leftImg.remove();
         centerImg.remove();
         rightImg.remove();
@@ -186,3 +192,41 @@ function theGraphs(theData,id,type){
     });
 }
 
+
+
+function setItem(){
+  var order = JSON.stringify(data);
+  localStorage.setItem( 'theData', order);
+}
+
+function render(){
+  // if(totalClicks >=25){
+    // console.log(shownArr);
+    // console.log(pickedArr);
+    
+    for (i = 0; i<itemName.length;i++){
+        var creating = document.createElement('li');
+        contenerOfLists.appendChild(creating);
+        shown.push(data[i].appear);
+        pickedImg.push(data[i].picks);
+        creating.textContent = `${data[i].name} is appear ${data[i].appear} and has ${data[i].picks}picks`;
+
+        
+    }
+    setItem();
+    // leftImg.remove();
+    // centerImg.remove();
+    // rightImg.remove();
+    // theGraphs(shown,'graph1','shown');
+    // theGraphs(pickedImg,'graph2','picked');
+
+
+  // }
+}
+
+function getItem(){
+  var coffeeOrders = localStorage.getItem('theData');
+  data = JSON.parse(coffeeOrders);
+  render();
+}
+getItem();

@@ -122,13 +122,13 @@ function clickEvent(event){
     }
   }
   
-  setItem(); // console.log(totalClicks);
+   // console.log(totalClicks);
     
 
     /////to remove eventlistener
     if(totalClicks === 25){
-      
-      // render();
+      setItem();
+      render();
       
       theContener.removeEventListener('click',clickEvent)
       leftImg.remove();

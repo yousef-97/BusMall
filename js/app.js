@@ -121,31 +121,21 @@ function clickEvent(event){
             break;       
     }
   }
-    // console.log(totalClicks);
+  
+  setItem(); // console.log(totalClicks);
     
 
     /////to remove eventlistener
     if(totalClicks === 25){
-      render();
-      theContener.removeEventListener('click',clickEvent)
+      
       // render();
-    //     // console.log(shownArr);
-    //     // console.log(pickedArr);
-    //     theContener.removeEventListener('click',clickEvent)
-    //     for (i = 0; i<itemName.length;i++){
-    //         var creating = document.createElement('li');
-    //         contenerOfLists.appendChild(creating);
-    //         shown.push(data[i].appear);
-    //         pickedImg.push(data[i].picks);
-    //         creating.textContent = `${data[i].name} is appear ${data[i].appear} and has ${data[i].picks}picks`;
-            
-            
-    //     }
-        leftImg.remove();
-        centerImg.remove();
-        rightImg.remove();
-        theGraphs(shown,'graph1','shown');
-        theGraphs(pickedImg,'graph2','picked');
+      
+      theContener.removeEventListener('click',clickEvent)
+      leftImg.remove();
+      centerImg.remove();
+      rightImg.remove();
+      theGraphs(shown,'graph1','shown');
+      theGraphs(pickedImg,'graph2','picked');
 
     
       }
@@ -166,8 +156,6 @@ function getRandomNum(min, max) {
 
 function theGraphs(theData,id,type){
     var graph = document.getElementById(id).getContext('2d');
-    // var graph = document.getElementById('graph2').getContext('2d');
-    // eslint-disable-next-line no-undef
     var myChart = new Chart(graph, {
       type: 'bar',
       data: {
@@ -199,34 +187,30 @@ function setItem(){
   localStorage.setItem( 'theData', order);
 }
 
-function render(){
-  // if(totalClicks >=25){
-    // console.log(shownArr);
-    // console.log(pickedArr);
+function render(){ 
     
     for (i = 0; i<itemName.length;i++){
+      
         var creating = document.createElement('li');
         contenerOfLists.appendChild(creating);
         shown.push(data[i].appear);
         pickedImg.push(data[i].picks);
         creating.textContent = `${data[i].name} is appear ${data[i].appear} and has ${data[i].picks}picks`;
-
         
     }
-    setItem();
-    // leftImg.remove();
-    // centerImg.remove();
-    // rightImg.remove();
-    // theGraphs(shown,'graph1','shown');
-    // theGraphs(pickedImg,'graph2','picked');
-
-
-  // }
+    
+    
 }
 
 function getItem(){
-  var coffeeOrders = localStorage.getItem('theData');
-  data = JSON.parse(coffeeOrders);
-  render();
+  var getting = localStorage.getItem('theData');
+  
+  if (getting){
+    data = JSON.parse(getting);
+    
+  }
+  
 }
+
 getItem();
+render();
